@@ -1,5 +1,9 @@
 //Interactive scene
 //Jaden Sung
+//10/2/2025
+//A simple version of snake just to fill out the rubric quickly since the project I wanted to do was messed up....
+//Caylixx Star for helping me set up the grid and helping me with anything that had to do with the Math things and with the movement that used to go anywhere but now is restricted.
+//A BIG THANK YOU TO P5JS REFERENCE WEBSITE AND A SNAKE DEMO THERE, GOD BLESS ITS SOUL.
 
 
 
@@ -10,16 +14,17 @@ let cols;
 let rows;
 let x = 1;
 let y = 0;
+let speed = 30;
 let gameOver = false;
 
 function setup() {
-  createCanvas(400, 400);
-  frameRate(5);
+  createCanvas(window.innerWidth, window.innerHeight);
+  frameRate(speed);
   cols = width / gridSize;
   rows = height / gridSize;
   //one in the middle
   snake[0] = { x: Math.floor(cols / 2), y: Math.floor(rows / 2) };
-  //s[awms food]
+  //spawms food
   spawnFood();
 }
 
@@ -71,28 +76,31 @@ function draw() {
     rect(part.x * gridSize, part.y * gridSize, gridSize, gridSize);
   }
 }
-
+//all my keyboard inputs
 function keyPressed() {
   if (gameOver && key === 'r') {
     restartGame();
     return;
   }
-
+  //up
   if (keyCode === UP_ARROW && y !== 1) {
     x = 0;
     y = -1;
+  //down
   } else if (keyCode === DOWN_ARROW && y !== -1) {
     x = 0;
     y = 1;
+  //left
   } else if (keyCode === LEFT_ARROW && x !== 1) {
     x = -1;
     y = 0;
+  //right
   } else if (keyCode === RIGHT_ARROW && x !== -1) {
     x = 1;
     y = 0;
   }
 }
-
+//randomly set where the food goes
 function spawnFood() {
   food = {
     x: Math.floor(random(cols)),
@@ -100,14 +108,22 @@ function spawnFood() {
   };
 }
 
-function resetGame() {
-  gameOver = true;
-}
-
+//checks if my game is over or not for both the ones underneath
 function restartGame() {
   snake = [{ x: Math.floor(cols / 2), y: Math.floor(rows / 2) }];
   x = 1;
   y = 0;
   gameOver = false;
   spawnFood();
+}
+
+function resetGame() {
+  gameOver = true;
+}
+
+function changeFrames(){
+  if (event.deltaY){
+    speed = frameRate + 1
+  }
+  
 }
