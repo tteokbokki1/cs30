@@ -19,7 +19,7 @@ function setup() {
   rows = height / gridSize;
   //one in the middle
   snake[0] = { x: Math.floor(cols / 2), y: Math.floor(rows / 2) };
-  //
+  //s[awms food]
   spawnFood();
 }
 
@@ -38,13 +38,15 @@ function draw() {
 
   //move the snake
   let head = { x: snake[0].x + x, y: snake[0].y + y };
-  snake.unshift(head); // Add new head
+  //moves the head forwards
+  snake.unshift(head);
 
   //eat food
   if (head.x === food.x && head.y === food.y) {
     spawnFood();
   } else {
-    snake.pop(); // Move forward (remove tail)
+    //moves tail back
+    snake.pop();
   }
 
   //wall collision
