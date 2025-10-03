@@ -3,33 +3,109 @@
 
 
 
-//let myArray2 = ['black','white', 'black','white', 'black','white', 'black','white']
-//let myArray = ['white', 'black'];
+let snake = [];
+let food;
+let gridSize = 20;
+let cols;
+let rows;
+let x = 1;
+let y = 0;
+let gameOver = false;
 
 function setup() {
-  if (windowWidth > windowHeight) {
-    createCanvas(windowHeight, windowHeight);
-  }
-  if (windowHeight > windowWidth) {
-    createCanvas(windowWidth, windowWidth);
-  }
-  else{
-    createCanvas(windowWidth, windowHeight);
-  }
+  createCanvas(400, 400);
+  frameRate(5);
+  cols = width / gridSize;
+  rows = height / gridSize;
+  //one in the middle
+  snake[0] = { x: Math.floor(cols / 2), y: Math.floor(rows / 2) };
+  //
+  spawnFood();
 }
 
 function draw() {
-  let squareSize = windowWidth / 8;
   background(220);
-  for (let x = 0; x < 8; x ++) {
-    for (let y = 0; y < 8; y ++) {
-      if ((x + y) % 2 === 0) {
-        fill(255);
-      } else {
-        fill(0);
-      }
-      rect(x * squareSize,y * squareSize, squareSize, squareSize);
+  if (gameOver) {
+    //game over screen
+    fill(0);
+    textAlign(CENTER, CENTER);
+    textSize(40);
+    text("Game Over", width / 2, height / 2);
+    textSize(20);
+    text("Press R to Restart", width / 2, height / 2 + 40);
+    return;
+  }
+
+  //move the snake
+  let head = { x: snake[0].x + x, y: snake[0].y + y };
+  snake.unshift(head); // Add new head
+
+  //eat food
+  if (head.x === food.x && head.y === food.y) {
+    spawnFood();
+  } else {
+    snake.pop(); // Move forward (remove tail)
+  }
+
+  //wall collision
+  if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) {
+    resetGame();
+  }
+
+  //self collision
+  for (let i = 1; i < snake.length; i++) {
+    if (head.x === snake[i].x && head.y === snake[i].y) {
+      resetGame();
     }
+  }
+
+  //caretes food
+  fill(255, 0, 0);
+  rect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+
+  //makes snake
+  fill(0);
+  for (let part of snake) {
+    rect(part.x * gridSize, part.y * gridSize, gridSize, gridSize);
   }
 }
 
+function keyPressed() {
+  if (gameOver && key === 'r') {
+    restartGame();
+    return;
+  }
+
+  if (keyCode === UP_ARROW && y !== 1) {
+    x = 0;
+    y = -1;
+  } else if (keyCode === DOWN_ARROW && y !== -1) {
+    x = 0;
+    y = 1;
+  } else if (keyCode === LEFT_ARROW && x !== 1) {
+    x = -1;
+    y = 0;
+  } else if (keyCode === RIGHT_ARROW && x !== -1) {
+    x = 1;
+    y = 0;
+  }
+}
+
+function spawnFood() {
+  food = {
+    x: Math.floor(random(cols)),
+    y: Math.floor(random(rows))
+  };
+}
+
+function resetGame() {
+  gameOver = true;
+}
+
+function restartGame() {
+  snake = [{ x: Math.floor(cols / 2), y: Math.floor(rows / 2) }];
+  x = 1;
+  y = 0;
+  gameOver = false;
+  spawnFood();
+}
