@@ -4,6 +4,8 @@
 //A simple version of snake just to fill out the rubric quickly since the project I wanted to do was messed up....
 //Caylixx Star for helping me set up the grid and helping me with anything that had to do with the Math things and with the movement that used to go anywhere but now is restricted.
 //A BIG THANK YOU TO P5JS REFERENCE WEBSITE AND A SNAKE DEMO THERE, GOD BLESS ITS SOUL.
+//and a ty to Krishita for giving me idea
+//tbh I wanted a starting point on how to get scroll wheel to work from google and it just gave me the answer so thats how I got event.de;ta
 
 
 
@@ -45,7 +47,6 @@ function draw() {
   let head = { x: snake[0].x + x, y: snake[0].y + y };
   //moves the head forwards
   snake.unshift(head);
-
   //eat food
   if (head.x === food.x && head.y === food.y) {
     spawnFood();
@@ -53,12 +54,10 @@ function draw() {
     //moves tail back
     snake.pop();
   }
-
   //wall collision
   if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) {
     resetGame();
   }
-
   //self collision
   for (let i = 1; i < snake.length; i++) {
     if (head.x === snake[i].x && head.y === snake[i].y) {
@@ -122,8 +121,12 @@ function resetGame() {
 }
 
 function changeFrames(){
-  if (event.deltaY){
-    speed = frameRate + 1
+  //decrease the number if the wheel scrolls down
+   if (event.delta > 0) {
+    speed = speed - 1;
   }
-  
+  //increase the number if the wheel scrolls up
+  if (event.delta < 0) {
+    speed = speed + 1;
+  }
 }
