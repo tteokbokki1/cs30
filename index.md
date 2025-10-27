@@ -6,6 +6,7 @@
 - [Perlin Noise](perlin-noise)
 - [Perlin Bubbles](perlin-bubbles)
 - [Perlin Noise Terrain](perlin-terrain)
+- [Grid](grid)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)
