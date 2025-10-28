@@ -18,15 +18,29 @@ function draw() {
 }
 
 function mousePressed() {
-  let j = Math.floor(mouseX/CELL_SIZE);
-  let i = Math.floor(mouseY/CELL_SIZE);
+  let x = Math.floor(mouseX/CELL_SIZE);
+  let y = Math.floor(mouseY/CELL_SIZE);
 
-  toggleCell(j,i);
+  //self
+  toggleCell(x ,y);
 
-  toggleCell(j + 1, i);
-  toggleCell(j - 1, i);
-  toggleCell(j, i + 1);
-  toggleCell(j, i - 1);
+  //neighbours
+  toggleCell(x + 1, y);
+  toggleCell(x - 1, y);
+  toggleCell(x, y - 1);
+  toggleCell(x, y + 1);
+}
+
+function toggleCell(x, y) {
+  //make sure the cell you're toggling actually exists!
+  if (x >= 0 && x < cols && y >= 0 && y < rows) {
+    if (grid[y][x] === 0) {
+      grid[y][x] = 1;
+    }
+    else if (grid[y][x] === 1) {
+      grid[y][x] = 0;
+    }
+  }
 }
 
 function keyPressed() {
@@ -34,57 +48,48 @@ function keyPressed() {
     grid = generateRandomGrid(cols, rows);
   }
   else if (key === "e") {
-    gird = generateRandomGrid(cols, rows);
+    grid = generateEmptyGrid(cols, rows);
+  }
+}
+
+function displayGrid() {
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (grid[y][x] === 0) {
+        fill("white");
+      }
+      else if (grid[y][x] === 1) {
+        fill("black");
+      }
+      square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
+    }
   }
 }
 
 function generateRandomGrid(cols, rows) {
   let newGrid = [];
-  for (let i = 0; i < rows; i++) {
+  for (let y = 0; y < rows; y++) {
     newGrid.push([]);
-    for (let j = 0; j < cols; j++) {
+    for (let x = 0; x < cols; x++) {
+      //pick 0 or 1 randomly
       if (random(100) < 50) {
-        newGrid[i].push(0);
+        newGrid[y].push(0);
       }
       else {
-        newGrid[i].push(1);
+        newGrid[y].push(1);
       }
     }
   }
   return newGrid;
 }
 
-function displayGrid() {
-  for (let i = 0; i < rows; i++){
-    for (let j = 0; j < cols; j++) {
-      if (grid[i][j] === 0) {
-        fill('white');
-      }
-      else if (grid[i][j] === 1) {
-        fill('black');
-      }
-      square(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-    }
-  }
-  return newGrid;
-}
-
-function emptyGrid(cols, rows) {
+function generateEmptyGrid(cols, rows) {
   let newGrid = [];
-  for (let i = 0; i < rows; i++) {
+  for (let y = 0; y < rows; y++) {
     newGrid.push([]);
-    for (let j = 0; j < cols; j++) {
-      newGrid[i].push(0);
+    for (let x = 0; x < cols; x++) {
+      newGrid[y].push(0);
     }
   }
   return newGrid;
-}
-
-function toggleCell(j,i) {
-  if (grid[i][j] === 0) {
-    grid[i][j] === 1;
-  }
-  else if (grid[i][j] === 1) {
-    grid[i][j] === 0;
-  }
 }
