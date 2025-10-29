@@ -7,7 +7,9 @@
 - [Perlin Bubbles](perlin-bubbles)
 - [Perlin Noise Terrain](perlin-terrain)
 - [Grid](grid)
+- [Gridp2](girdp2)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)
 - [Array](array)
+- [GoL](game-of-life)
