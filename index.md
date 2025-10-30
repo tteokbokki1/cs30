@@ -8,8 +8,9 @@
 - [Perlin Noise Terrain](perlin-terrain)
 - [Grid](grid)
 - [Gridp2](girdp2)
+- [GoL](game-of-life)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)
 - [Array](array)
-- [GoL](game-of-life)
+- [Grid Based game](gridg)
