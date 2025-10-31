@@ -9,6 +9,7 @@
 - [Grid](grid)
 - [Gridp2](girdp2)
 - [GoL](game-of-life)
+- [Character movement](moving)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)
