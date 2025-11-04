@@ -12,6 +12,11 @@ let thePlayer = {
   y: 0,
 };
 
+function preload() {
+  path = loadImage("")
+  wall = loadImage("")
+}
+
 function setup() {
   createCanvas(windowWidth * 0.9, windowHeight * 0.9);
   cols = Math.floor(width/CELL_SIZE);
