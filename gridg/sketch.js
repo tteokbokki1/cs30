@@ -18,20 +18,21 @@
 //   }
 // }
 const ARRAYSIZE = ((windowWidth*0.6)/16);
-const 
+
+
+
+let cols;
+let rows;
+let levelToLoad;
+let lines;
+
+function preload() {
+  //load level data
+  levelToLoad = "levels/0.txt";
+  lines = loadStrings(levelToLoad);
 
 let grid = [
-  [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 99, 1, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 ];
 
 function preload() {
@@ -44,6 +45,24 @@ function setup() {
 
 function draw() {
   background(img);
+}
+
+function preload() {
+  //load level data
+  levelToLoad = "levels/0.txt";
+  lines = loadStrings(levelToLoad);
+
+  //load background
+  levelBackground = loadImage("images/level_background.png");
+
+  //load tile images
+  platform = loadImage("images/platform.png");
+  coin = loadImage("images/coin.png");
+  exclamationBox = loadImage("images/boxItem.png");
+  fly = loadImage("images/flyFly1.png");
+  p1 = loadImage("images/p1_front.png");
+  slime = loadImage("images/slimeWalk1.png");
+  empty = loadImage("images/empty.png");
 }
 
 function map119() {
