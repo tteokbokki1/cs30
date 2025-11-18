@@ -11,6 +11,9 @@
 - [GoL](game-of-life)
 - [Character movement](moving)
 - [Basic OOP](basic-OOP)
+- [Walker OOP](walker-OOP)
+- [Firework OOP](firework_OOP)
+- [NO=ode]
 
 
 ## Assignments
