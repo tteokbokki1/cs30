@@ -13,7 +13,8 @@
 - [Basic OOP](basic-OOP)
 - [Walker OOP](walker-OOP)
 - [Firework OOP](firework_OOP)
-- [NO=ode]
+- [Nodes OOP](node_oop)
+- [Sub/Sup OOP](subsup_oop)
 
 
 ## Assignments
